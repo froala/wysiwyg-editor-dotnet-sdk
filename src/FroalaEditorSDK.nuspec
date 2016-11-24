@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/froala/wysiwyg-editor-dotnet-sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/froala/wysiwyg-editor-dotnet-sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>>Ease server integration of the Froala WYSIWYG HTML Editor.</description>
+    <description>Ease server integration of the Froala WYSIWYG HTML Editor.</description>
     <copyright>Copyright 2016</copyright>
     <tags>froala wysiwyg html editor richt text editor image upload</tags>
     <dependencies>
