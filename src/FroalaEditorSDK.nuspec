@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>FroalaEditorSDK</id>
+    <version>1.0.0</version>
+    <title>Froala WYSIWYG Editor SDK</title>
+    <authors>Froala Labs</authors>
+    <owners>Froala</owners>
+    <licenseUrl>https://github.com/froala/wysiwyg-editor-dotnet-sdk/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/froala/wysiwyg-editor-dotnet-sdk</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>>Ease server integration of the Froala WYSIWYG HTML Editor.</description>
+    <copyright>Copyright 2016</copyright>
+    <tags>froala wysiwyg html editor richt text editor image upload</tags>
+    <dependencies>
+      <group>
+        <dependency id="RouteMagic" version="1.1.0" />
+      </group>
+
+      <group targetFramework="net452">
+        <dependency id="Magick.NET-Q16-AnyCPU" version="7.0.3.502" />
+      </group>
+
+      <group targetFramework="netstandard1.3">
+        <dependency id="Magick.NET.Core-Q16" version="7.0.3.502" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="Microsoft.AspNet.WebUtilities"/>
+        <dependency id="Microsoft.AspNetCore.Https" version="1.0.0" />
+        <dependency id="Microsoft.AspNet.StaticFiles" />
+        <dependency id="Microsoft.AspNetCore.Hosting" version="1.0.0" />
+        <dependency id="NETStandard.Library" version="1.6.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Debug\net452\FroalaEditorSDK.dll" target="lib\net452\FroalaEditorSDK.dll" />
+    <file src="bin\Debug\netstandard1.3\FroalaEditorSDK.dll" target="lib\netstandard1.3\FroalaEditorSDK.dll" />
+  </files>
+</package>
