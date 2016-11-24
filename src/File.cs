@@ -2,9 +2,9 @@
 using System;
 using System.IO;
 #if netcore
-    using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 #else
-    using System.Web;
+using System.Web;
 #endif
 
 namespace FroalaEditor
@@ -12,30 +12,23 @@ namespace FroalaEditor
     /// <summary>
     /// File functionality.
     /// </summary>
-    public class File
+    public static class File
     {
-        public HttpContext httpContext;
-
         /// <summary>
         /// Content type string used in http multipart.
         /// </summary>
-        public string MultipartContentType = "multipart/form-data";
+        public static string MultipartContentType = "multipart/form-data";
 
         /// <summary>
         /// File default options.
         /// </summary>
-        public FileOptions defaultOptions;
-
-        public File (HttpContext context) {
-            httpContext = context;
-            defaultOptions = new FileOptions();
-        }
+        public static FileOptions defaultOptions = new FileOptions();
 
         /// <summary>
         /// Check http request content type.
         /// </summary>
         /// <returns>true if content type is multipart.</returns>
-        public bool CheckContentType()
+        public static bool CheckContentType(HttpContext httpContext)
         {       
             bool isMultipart = httpContext.Request.ContentType.StartsWith(MultipartContentType);
 
@@ -45,10 +38,11 @@ namespace FroalaEditor
         /// <summary>
         /// Uploads a file to disk.
         /// </summary>
+        /// <param name="httpContext">The HttpContext object containing information about the request.</param>
         /// <param name="fileRoute">Server route where the file will be uploaded. This route must be public to be accesed by the editor.</param>
         /// <param name="options">File options.</param>
         /// <returns>Object with link.</returns>
-        public object Upload(string fileRoute, FileOptions options = null)
+        public static object Upload(HttpContext httpContext, string fileRoute, FileOptions options = null)
         {
             // Use default file options.
             if (options == null)
@@ -56,7 +50,7 @@ namespace FroalaEditor
                 options = defaultOptions;
             }
 
-            if (!CheckContentType())
+            if (!CheckContentType(httpContext))
             {
                 throw new Exception("Invalid contentType. It must be " + MultipartContentType);
             }
@@ -64,11 +58,11 @@ namespace FroalaEditor
             var httpRequest = httpContext.Request;
 
             int filesCount = 0;
-            #if netcore
-                filesCount = httpRequest.Form.Files.Count;
-            #else
-                filesCount = httpRequest.Files.Count;
-            #endif
+#if netcore
+            filesCount = httpRequest.Form.Files.Count;
+#else
+            filesCount = httpRequest.Files.Count;
+#endif
 
             if (filesCount == 0)
             {
@@ -76,11 +70,11 @@ namespace FroalaEditor
             }
 
             // Get HTTP posted file based on the fieldname. 
-            #if netcore
-                var file = httpRequest.Form.Files.GetFile(options.Fieldname);
-            #else
-                var file = httpRequest.Files.Get(options.Fieldname);
-            #endif
+#if netcore
+            var file = httpRequest.Form.Files.GetFile(options.Fieldname);
+#else
+            var file = httpRequest.Files.Get(options.Fieldname);
+#endif
 
             if (file == null)
             {
@@ -99,13 +93,13 @@ namespace FroalaEditor
 
             // Copy contents to memory stream.
             Stream stream;
-            #if netcore
-                stream = new MemoryStream();
-                file.CopyTo(stream);
-                stream.Position = 0;
-            #else
-                stream = file.InputStream;
-            #endif
+#if netcore
+            stream = new MemoryStream();
+            file.CopyTo(stream);
+            stream.Position = 0;
+#else
+            stream = file.InputStream;
+#endif
 
             String serverPath = File.GetAbsoluteServerPath(link);
 
@@ -124,13 +118,18 @@ namespace FroalaEditor
             return new { link = link.Replace("wwwroot/", "") };
         }
 
+        /// <summary>
+        /// Get absolute server path.
+        /// </summary>
+        /// <param name="path">Relative path.</param>
+        /// <returns>Absolute path.</returns>
         public static String GetAbsoluteServerPath(string path) 
         {
-            #if netcore
-                return path;
-            #else 
-                return HttpContext.Current.Server.MapPath(path);
-            #endif
+#if netcore
+            return path;
+#else 
+            return HttpContext.Current.Server.MapPath(path);
+#endif
         }
 
         /// <summary>
@@ -139,7 +138,7 @@ namespace FroalaEditor
         /// <param name="fileStream">Input file stream</param>
         /// <param name="link">Server file path.</param>
         /// <param name="options">File options.</param>
-        public void Save(Stream fileStream, string filePath, FileOptions options)
+        public static void Save(Stream fileStream, string filePath, FileOptions options)
         {
             if (options is ImageOptions && ((ImageOptions)options).ResizeGeometry != null)
             {

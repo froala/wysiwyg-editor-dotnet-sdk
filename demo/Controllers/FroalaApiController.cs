@@ -11,16 +11,16 @@ namespace demo.Controllers
             string uploadPath = "/Public/";
 
             object response;
-            //try
-            //{
+            try
+            {
                 var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
                 response = image.Upload(uploadPath);
                 return Json(response, JsonRequestBehavior.AllowGet);
-            //}
-           // catch (Exception e)
-           // {
-           //     return Json(e, JsonRequestBehavior.AllowGet);
-          //  }
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
         }
 
         public ActionResult UploadFile()
@@ -49,7 +49,7 @@ namespace demo.Controllers
             {
                 var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
                 response = image.List(uploadPath);
-                return Json(response);
+                return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

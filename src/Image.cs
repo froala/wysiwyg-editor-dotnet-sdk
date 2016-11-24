@@ -2,10 +2,10 @@
 using System.IO;
 using System.Collections.Generic;
 #if netcore
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNet.StaticFiles;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNet.StaticFiles;
 #else
-    using System.Web;
+using System.Web;
 #endif
 
 namespace FroalaEditor
@@ -13,15 +13,38 @@ namespace FroalaEditor
     /// <summary>
     /// Image functionality.
     /// </summary>
-    public class Image:File
+    public static class Image
     {
         /// <summary>
         /// Content type string used in http multipart.
         /// </summary>
 
-        public Image (HttpContext context): base(context) {
-            httpContext = context;
-            defaultOptions = new ImageOptions();
+        public static ImageOptions defaultOptions = new ImageOptions();
+
+        /// <summary>
+        /// Uploads an image to disk.
+        /// </summary>
+        /// <param name="httpContext">The HttpContext object containing information about the request.</param>
+        /// <param name="fileRoute">Server route where the file will be uploaded. This route must be public to be accesed by the editor.</param>
+        /// <param name="options">File options.</param>
+        /// <returns>Object with link.</returns>
+        public static object Upload (HttpContext httpContext, string fileRoute, FileOptions options = null)
+        {
+            if (options == null)
+            {
+                options = defaultOptions;
+            }
+
+            return File.Upload(httpContext, fileRoute, options);
+        }
+
+        /// <summary>
+        /// Delete an image from disk.
+        /// </summary>
+        /// <param name="src">Server image path.</param>
+        public static void Delete(string filePath)
+        {
+            File.Delete(filePath);
         }
 
         /// <summary>
@@ -30,7 +53,7 @@ namespace FroalaEditor
         /// <param name="folderPath">Server folder path.</param>
         /// <param name="thumbPath">Optional. Server thumb path.</param>
         /// <returns></returns>
-        public List<object> List(string folderPath, string thumbPath = null)
+        public static List<object> List(string folderPath, string thumbPath = null)
         {
             // Use thumbPath as folderPath.
             if (thumbPath == null)
@@ -41,7 +64,7 @@ namespace FroalaEditor
             // Array of image objects to return.
             List<object> response = new List<object>();
 
-            string absolutePath = GetAbsoluteServerPath(folderPath);
+            string absolutePath = File.GetAbsoluteServerPath(folderPath);
 
             string[] imageMimetypes = ImageValidation.AllowedImageMimetypesDefault;
 
@@ -59,15 +82,15 @@ namespace FroalaEditor
                 string fileName = System.IO.Path.GetFileName(filePath);
                 if (System.IO.File.Exists(filePath))
                 {   
-                    #if netcore
-                        string mimeType;
-                        new FileExtensionContentTypeProvider().TryGetContentType(filePath, out mimeType);
-                        if (mimeType == null) {
-                            mimeType = "application/octet-stream";
-                        }
-                    #else
-                        string mimeType = System.Web.MimeMapping.GetMimeMapping(filePath);
-                    #endif        
+#if netcore
+                    string mimeType;
+                    new FileExtensionContentTypeProvider().TryGetContentType(filePath, out mimeType);
+                    if (mimeType == null) {
+                        mimeType = "application/octet-stream";
+                    }
+#else
+                    string mimeType = System.Web.MimeMapping.GetMimeMapping(filePath);
+#endif        
 
                     if (Array.IndexOf(imageMimetypes, mimeType) >= 0)
                     {
