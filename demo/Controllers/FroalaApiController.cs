@@ -10,12 +10,9 @@ namespace demo.Controllers
         {
             string uploadPath = "/Public/";
 
-            object response;
             try
             {
-                var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
-                response = image.Upload(uploadPath);
-                return Json(response, JsonRequestBehavior.AllowGet);
+                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, uploadPath));
             }
             catch (Exception e)
             {
@@ -27,12 +24,9 @@ namespace demo.Controllers
         {
             string uploadPath = "/Public/";
 
-            object response;
             try
             {
-                var file = new FroalaEditor.File(System.Web.HttpContext.Current);
-                response = file.Upload(uploadPath);
-                return Json(response);
+                return Json(FroalaEditor.File.Upload(System.Web.HttpContext.Current, uploadPath));
             }
             catch (Exception e)
             {
@@ -44,12 +38,9 @@ namespace demo.Controllers
         {
             string uploadPath = "/Public/";
 
-            object response;
             try
             {
-                var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
-                response = image.List(uploadPath);
-                return Json(response, JsonRequestBehavior.AllowGet);
+                return Json(FroalaEditor.Image.List(uploadPath));
             }
             catch (Exception e)
             {
@@ -69,19 +60,14 @@ namespace demo.Controllers
                 ResizeGeometry = resizeGeometry
             };
 
-            object response;
             try
             {
-                var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
-                response = image.Upload(fileRoute, options);
+                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, fileRoute, options));
             }
             catch (Exception e)
             {
                 return Json(e);
             }
-
-
-            return Json(response);
         }
 
         public ActionResult UploadImageValidation()
@@ -91,11 +77,6 @@ namespace demo.Controllers
             Func<string, string, bool> validationFunction = (filePath, mimeType) => {
 
                 MagickImageInfo info = new MagickImageInfo(filePath);
-
-                //Console.WriteLine("====");
-                Console.WriteLine(info.Width);
-                Console.WriteLine(info.Height);
-
 
                 if (info.Width != info.Height)
                 {
@@ -111,19 +92,14 @@ namespace demo.Controllers
                 Validation = new FroalaEditor.ImageValidation(validationFunction)
             };
 
-            object response;
             try
             {
-                var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
-                response = image.Upload(fileRoute, options);
+                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, fileRoute, options));
             }
             catch (Exception e)
             {
                 return Json(e);
             }
-
-
-            return Json(response);
         }
 
         public ActionResult UploadFileValidation()
@@ -147,19 +123,14 @@ namespace demo.Controllers
                 Validation = new FroalaEditor.FileValidation(validationFunction)
             };
 
-            object response;
             try
             {
-                var image = new FroalaEditor.Image(System.Web.HttpContext.Current);
-                response = image.Upload(fileRoute, options);
+                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, fileRoute, options));
             }
             catch (Exception e)
             {
                 return Json(e);
             }
-
-
-            return Json(response);
         }
 
         public ActionResult DeleteFile()
@@ -167,14 +138,12 @@ namespace demo.Controllers
             try
             {
                 FroalaEditor.File.Delete(HttpContext.Request.Form["src"]);
+                return Json(true);
             }
             catch (Exception e)
             {
                 return Json(e);
             }
-
-
-            return Json(true);
         }
 
         public ActionResult DeleteImage()
@@ -182,14 +151,12 @@ namespace demo.Controllers
             try
             {
                 FroalaEditor.Image.Delete("/Public/" + HttpContext.Request.Form["src"]);
+                return Json(true);
             }
             catch (Exception e)
             {
                 return Json(e);
             }
-
-
-            return Json(true);
         }
 
         public object S3Signature()
