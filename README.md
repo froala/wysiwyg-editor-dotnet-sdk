@@ -1,6 +1,6 @@
-# Froala WYSIWYG Editor ASP.NET SDK
+# Froala WYSIWYG Editor .NET SDK
 
-Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor) server side integration in ASP.NET projects.
+Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor) server side integration in .NET projects.
 
 ## Dependencies
 
@@ -12,7 +12,7 @@ Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor
 
 2. Load `src` project directory in your project and import it.
 
-3. To run ASP.NET examples:
+3. To run .NET examples:
 
  * Open `FroalaEditorSDK.sln` in Visual Studio.
  * Run `demo` or `demo-core` project.
@@ -32,7 +32,7 @@ Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor
 
 ## License
 
-The Froala WYSIWYG Editor ASP.NET SDK is licensed under MIT license. However, in order to use Froala WYSIWYG HTML Editor plugin you should purchase a license for it.
+The Froala WYSIWYG Editor .NET SDK is licensed under MIT license. However, in order to use Froala WYSIWYG HTML Editor plugin you should purchase a license for it.
 
 Froala Editor has [3 different licenses](http://froala.com/wysiwyg-editor/pricing) for commercial use.
 For details please see [License Agreement](http://froala.com/wysiwyg-editor/terms).
