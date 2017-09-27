@@ -83,7 +83,8 @@ namespace FroalaEditor
 
             // Generate Random name.
             string extension = Utils.GetFileExtension(file.FileName);
-            string name = Utils.GenerateUniqueString() + "." + extension;
+            // Fixed Bug 1 : bug caused by uppercase file extension
+            string name = Utils.GenerateUniqueString() + "." + extension.ToLower(CultureInfo.InvariantCulture);
 
             string link = fileRoute + name; 
 
@@ -110,7 +111,8 @@ namespace FroalaEditor
             if (options.Validation != null && !options.Validation.Check(serverPath, file.ContentType))
             {
                 // Delete file.
-                Delete(serverPath);
+                // Fixed Bug 2 : wrong parameter sending, it must be "link", not "serverPath"
+                Delete(link);
                 throw new Exception("File does not meet the validation.");
             }
 
