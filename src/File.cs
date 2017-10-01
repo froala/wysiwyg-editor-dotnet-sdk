@@ -89,7 +89,7 @@ namespace FroalaEditor
             string link = fileRoute + name; 
 
             // Create directory if it doesn't exist.
-            FileInfo dir = new FileInfo(fileRoute);
+            FileInfo dir = new FileInfo(File.GetAbsoluteServerPath(fileRoute));
             dir.Directory.Create();
 
             // Copy contents to memory stream.
