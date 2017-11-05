@@ -1,5 +1,5 @@
 /*!
- * froala_editor v2.3.4 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.3.5 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2016 Froala Labs
  */
@@ -693,6 +693,10 @@
   width: 38px;
   height: 37px;
 }
+.gray-theme.fr-toolbar .fr-command.fr-btn.fr-btn-text,
+.gray-theme.fr-popup .fr-command.fr-btn.fr-btn-text {
+  width: auto;
+}
 .gray-theme.fr-toolbar .fr-command.fr-btn i,
 .gray-theme.fr-popup .fr-command.fr-btn i {
   font-size: 15px;
@@ -705,6 +709,7 @@
   line-height: 14px;
   min-width: 38px;
   height: 15px;
+  padding: 0 2px;
 }
 .gray-theme.fr-toolbar .fr-command.fr-btn img,
 .gray-theme.fr-popup .fr-command.fr-btn img {
@@ -777,25 +782,25 @@
 .gray-theme.fr-popup.fr-disabled .fr-btn.fr-active.fr-dropdown::after {
   border-top-color: #b7bdc0;
 }
-.gray-theme .fr-desktop .fr-command:hover,
-.gray-theme .fr-desktop .fr-command:focus {
+.gray-theme.fr-desktop .fr-command:hover,
+.gray-theme.fr-desktop .fr-command:focus {
   color: #37474f;
   background: #e6e6e6;
 }
-.gray-theme .fr-desktop .fr-command:hover::after,
-.gray-theme .fr-desktop .fr-command:focus::after {
+.gray-theme.fr-desktop .fr-command:hover::after,
+.gray-theme.fr-desktop .fr-command:focus::after {
   border-top-color: #37474f !important;
 }
-.gray-theme .fr-desktop .fr-command.fr-selected {
+.gray-theme.fr-desktop .fr-command.fr-selected {
   color: #37474f;
   background: #d6d6d6;
 }
-.gray-theme .fr-desktop .fr-command.fr-active:hover,
-.gray-theme .fr-desktop .fr-command.fr-active:focus {
+.gray-theme.fr-desktop .fr-command.fr-active:hover,
+.gray-theme.fr-desktop .fr-command.fr-active:focus {
   color: #0097a7;
   background: #e6e6e6;
 }
-.gray-theme .fr-desktop .fr-command.fr-active.fr-selected {
+.gray-theme.fr-desktop .fr-command.fr-active.fr-selected {
   color: #0097a7;
   background: #d6d6d6;
 }
