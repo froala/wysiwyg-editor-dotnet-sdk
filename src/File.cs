@@ -83,13 +83,19 @@ namespace FroalaEditor
 
             // Generate Random name.
             string extension = Utils.GetFileExtension(file.FileName);
-            string name = Utils.GenerateUniqueString() + "." + extension;
+
+            string name = $"{Utils.GenerateUniqueString()}.{extension}";
 
             string link = fileRoute + name; 
 
+            // Bug Fixes in File.cs #2
+            // https://github.com/froala/wysiwyg-editor-dotnet-sdk/issues/2
             // Create directory if it doesn't exist.
-            FileInfo dir = new FileInfo(fileRoute);
-            dir.Directory.Create();
+            var fileRoutePath = new FileInfo(File.GetAbsoluteServerPath(fileRoute));
+            if (fileRoutePath.Directory != null && !fileRoutePath.Directory.Exists)
+            {
+                fileRoutePath.Directory.Create();
+            }
 
             // Copy contents to memory stream.
             Stream stream;
@@ -109,8 +115,10 @@ namespace FroalaEditor
             // Check if the file is valid.
             if (options.Validation != null && !options.Validation.Check(serverPath, file.ContentType))
             {
-                // Delete file.
-                Delete(serverPath);
+                // Bug Fixes in File.cs #2
+                // https://github.com/froala/wysiwyg-editor-dotnet-sdk/issues/2
+                // Delete "link"
+                Delete(link);
                 throw new Exception("File does not meet the validation.");
             }
 
