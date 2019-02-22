@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>FroalaEditorSDK</id>
-    <version>1.0.0</version>
+    <version>3.0.0</version>
     <title>Froala WYSIWYG Editor SDK</title>
     <authors>Froala Labs</authors>
     <owners>Froala</owners>
@@ -17,23 +17,23 @@
         <dependency id="RouteMagic" version="1.1.0" />
       </group>
 
-      <group targetFramework="net452">
-        <dependency id="Magick.NET-Q16-AnyCPU" version="7.0.3.502" />
+      <group targetFramework="net471">
+        <dependency id="Magick.NET-Q16-AnyCPU" version="7.10.2" />
       </group>
 
-      <group targetFramework="netstandard1.3">
-        <dependency id="Magick.NET.Core-Q16" version="7.0.3.502" />
-        <dependency id="Newtonsoft.Json" version="9.0.1" />
-        <dependency id="Microsoft.AspNet.WebUtilities"/>
-        <dependency id="Microsoft.AspNetCore.Https" version="1.0.0" />
-        <dependency id="Microsoft.AspNet.StaticFiles" />
-        <dependency id="Microsoft.AspNetCore.Hosting" version="1.0.0" />
-        <dependency id="NETStandard.Library" version="1.6.1" />
+      <group targetFramework="netstandard2.0">
+        <dependency id="Magick.NET.Core-Q16" version="7.10.2" />
+        <dependency id="Newtonsoft.Json" version="12.0.1" />
+        <dependency id="Microsoft.AspNetCore.WebUtilities" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.StaticFiles"  version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Hosting" version="2.2.0" />
+        <dependency id="NETStandard.Library" version="2.2.0" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Debug\net452\FroalaEditorSDK.dll" target="lib\net452\FroalaEditorSDK.dll" />
-    <file src="bin\Debug\netstandard1.3\FroalaEditorSDK.dll" target="lib\netstandard1.3\FroalaEditorSDK.dll" />
+    <file src="bin\Debug\net471\FroalaEditorSDK.dll" target="lib\net471\FroalaEditorSDK.dll" />
+    <file src="bin\Debug\netstandard2.0\FroalaEditorSDK.dll" target="lib\netstandard2.0\FroalaEditorSDK.dll" />
   </files>
 </package>

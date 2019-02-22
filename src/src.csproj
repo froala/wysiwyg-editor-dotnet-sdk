@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Ease server integration of the Froala WYSIWYG HTML Editor.</Description>
+    <Copyright>Froala Labs</Copyright>
+    <AssemblyTitle>FroalaEditorSDK</AssemblyTitle>
+    <Authors>Froala</Authors>
+    <TargetFrameworks>net471;netstandard2.0</TargetFrameworks>
+    <AssemblyName>FroalaEditorSDK</AssemblyName>
+    <PackageId>src</PackageId>
+    <PackageTags>froala;wysiwyg;html;editor;rich;text;editor;image;upload</PackageTags>
+    <RepositoryUrl>https://github.com/froala/wysiwyg-editor-dotnet-sdk</RepositoryUrl>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard2.0' ">$(PackageTargetFallback);dnxcore50;portable-net45+win7</PackageTargetFallback>
+    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard2.0' ">2.0.3</NetStandardImplicitPackageVersion>
+    <Version>3.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net471' ">
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.10.2" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net471' ">
+    <DefineConstants>$(DefineConstants);net471</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);netcore</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Magick.NET.Core-Q16" Version="7.0.3.502" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+</Project>
