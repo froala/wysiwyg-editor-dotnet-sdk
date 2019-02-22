@@ -98,7 +98,13 @@
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
             imageManagerDeleteURL: "/FroalaApi/DeleteImage",
-            imageManagerDeleteMethod: "POST"
+            imageManagerDeleteMethod: "POST",
+            // Introduce the Video Upload Buttons
+            videoInsertButtons: ['videoBack', '|', 'videoByURL', 'videoEmbed', 'videoUpload'],
+            // Set the video upload URL.
+            videoUploadURL: '/FroalaApi/UploadVideo',
+            // Set request type.
+            videoUploadMethod: 'POST'
         })
         // Catch image removal from the editor.
         .on('froalaEditor.image.removed', function (e, editor, $img) {
@@ -251,7 +257,8 @@
         .done(function( data ) {
             $('#edit-amazon').froalaEditor({
                 imageUploadToS3: data,
-                fileUploadToS3: data
+                fileUploadToS3: data,
+                videoUploadToS3: data
             })
         });
     });
