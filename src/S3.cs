@@ -50,7 +50,7 @@ namespace FroalaEditor
             object policy = new
             {
                 // Expiration s3 image signature #11
-				expiration = DateTime.Now.AddMinutes(expirationInMinutes).ToString(@"yyyy-MM-dd\THH:mm:ss.000\Z"),
+                expiration = DateTime.Now.AddMinutes(expirationInMinutes).ToString(@"yyyy-MM-dd\THH:mm:ss.000\Z"),
                 conditions = new object[]
                 {
                     new {bucket = bucket},
