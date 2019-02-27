@@ -24,6 +24,13 @@ namespace FroalaEditor
             config.Region = config.Region != null ? config.Region : "us-east-1";
             config.Region = config.Region == "s3" ? "us-east-1" : config.Region;
 
+            // Expiration s3 image signature #11
+            double expirationInMinutes = 5;
+            if(double.TryParse(config.Expiration, out double parsedValue))
+            {
+                expirationInMinutes = parsedValue;
+            }
+
             // Important variables that will be used throughout this example.
             string bucket = config.Bucket;
             string region = config.Region;
@@ -42,7 +49,8 @@ namespace FroalaEditor
             // Build policy.
             object policy = new
             {
-                expiration = DateTime.Now.AddMinutes(5).ToString(@"yyyy-MM-dd\THH:mm:ss.000\Z"),
+                // Expiration s3 image signature #11
+                expiration = DateTime.Now.AddMinutes(expirationInMinutes).ToString(@"yyyy-MM-dd\THH:mm:ss.000\Z"),
                 conditions = new object[]
                 {
                     new {bucket = bucket},
