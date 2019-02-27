@@ -20,6 +20,20 @@ namespace demo.Controllers
             }
         }
 
+        public IActionResult UploadVideo()
+        {
+            string uploadPath = "wwwroot/uploads/";
+
+            try
+            {
+                return Json(FroalaEditor.Video.Upload(HttpContext, uploadPath));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
         public IActionResult UploadFile () {
             string uploadPath = "wwwroot/uploads/";
 
