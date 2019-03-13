@@ -35,5 +35,10 @@ namespace FroalaEditor
         /// Amazon Secret key. Can be found on your Account page, under Security Credentials > Access Keys.
         /// </summary>
         public string SecretKey { get; set; }
+
+        /// <summary>
+        /// Expiration in minutes for the S3 signature
+        /// </summary>
+        public string Expiration { get; set; }
     }
 }

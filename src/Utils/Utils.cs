@@ -57,7 +57,10 @@ namespace FroalaEditor
         /// <returns>Extension without the dot.</returns>
         public static string GetFileExtension(string filename)
         {
-            return filename.Substring(filename.LastIndexOf('.') + 1);
+            // Bug Fixes in File.cs #2
+            // https://github.com/froala/wysiwyg-editor-dotnet-sdk/issues/2
+            // Use lowercase extension
+            return filename.Substring(filename.LastIndexOf('.') + 1).ToLowerInvariant();
         }
 
         /// <summary>

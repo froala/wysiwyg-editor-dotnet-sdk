@@ -20,6 +20,20 @@ namespace demo.Controllers
             }
         }
 
+        public IActionResult UploadVideo()
+        {
+            string uploadPath = "wwwroot/uploads/";
+
+            try
+            {
+                return Json(FroalaEditor.Video.Upload(HttpContext, uploadPath));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
         public IActionResult UploadFile () {
             string uploadPath = "wwwroot/uploads/";
 
@@ -169,7 +183,8 @@ namespace demo.Controllers
                 KeyStart = Environment.GetEnvironmentVariable("AWS_KEY_START"),
                 Acl = Environment.GetEnvironmentVariable("AWS_ACL"),
                 AccessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
-                SecretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY")
+                SecretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
+                Expiration = Environment.GetEnvironmentVariable("AWS_EXPIRATION") // Expiration s3 image signature #11
             };
 
             return Json(FroalaEditor.S3.GetHash(config));
