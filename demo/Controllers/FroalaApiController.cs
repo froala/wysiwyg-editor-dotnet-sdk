@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
 using ImageMagick;
 
@@ -54,7 +54,7 @@ namespace demo.Controllers
 
             try
             {
-                return Json(FroalaEditor.Image.List(uploadPath));
+                return Json(FroalaEditor.Image.List(uploadPath), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace demo.Controllers
         {
             try
             {
-                FroalaEditor.Image.Delete("/Public/" + HttpContext.Request.Form["src"]);
+                FroalaEditor.Image.Delete(HttpContext.Request.Form["src"]);
                 return Json(true);
             }
             catch (Exception e)
