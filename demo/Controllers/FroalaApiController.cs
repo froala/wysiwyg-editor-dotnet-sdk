@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
 using ImageMagick;
 
@@ -13,6 +13,20 @@ namespace demo.Controllers
             try
             {
                 return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, uploadPath));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+        public ActionResult UploadVideo()
+        {
+            string uploadPath = "/Public/";
+
+            try
+            {
+                return Json(FroalaEditor.Video.Upload(System.Web.HttpContext.Current, uploadPath));
             }
             catch (Exception e)
             {
@@ -40,7 +54,7 @@ namespace demo.Controllers
 
             try
             {
-                return Json(FroalaEditor.Image.List(uploadPath));
+                return Json(FroalaEditor.Image.List(uploadPath), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -150,7 +164,7 @@ namespace demo.Controllers
         {
             try
             {
-                FroalaEditor.Image.Delete("/Public/" + HttpContext.Request.Form["src"]);
+                FroalaEditor.Image.Delete(HttpContext.Request.Form["src"]);
                 return Json(true);
             }
             catch (Exception e)
@@ -168,7 +182,8 @@ namespace demo.Controllers
                 KeyStart = Environment.GetEnvironmentVariable("AWS_KEY_START"),
                 Acl = Environment.GetEnvironmentVariable("AWS_ACL"),
                 AccessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
-                SecretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY")
+                SecretKey = Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
+                Expiration = Environment.GetEnvironmentVariable("AWS_EXPIRATION")  // Expiration s3 image signature #11
             };
 
             return Json(FroalaEditor.S3.GetHash(config), JsonRequestBehavior.AllowGet);
