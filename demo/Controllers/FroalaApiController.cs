@@ -173,6 +173,19 @@ namespace demo.Controllers
             }
         }
 
+	    public ActionResult DeleteVideo()
+        {
+            try
+            {
+                FroalaEditor.Video.Delete(HttpContext.Request.Form["src"]);
+                return Json(true);
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
         public object S3Signature()
         {
             FroalaEditor.S3Config config = new FroalaEditor.S3Config
