@@ -161,6 +161,20 @@ namespace demo.Controllers
             }
         }
 
+        public IActionResult DeleteVideo()
+        {
+            try
+            {
+                FroalaEditor.Video.Delete(HttpContext.Request.Form["src"]);
+                return Json(true);
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+
         public IActionResult DeleteImage()
         {
             try

@@ -128,6 +128,28 @@
             })
         })
         // Catch image removal from the editor.
+            .on('froalaEditor.video.removed', function (e, editor, $vid) {
+                $.ajax({
+                    // Request method.
+                    method: "POST",
+
+                    // Request URL.
+                    url: "/FroalaApi/DeleteVideo",
+
+                    // Request params.
+                    data: {
+                        src: $vid.attr('src')
+                    }
+                })
+                    .done(function (data) {
+                        console.log('video was deleted');
+                    })
+                    .fail(function (err) {
+                        console.log('video delete problem: ' + JSON.stringify(err));
+                    })
+            })
+            
+        // Catch image removal from the editor.
         .on('froalaEditor.file.unlink', function (e, editor, link) {
             $.ajax({
                 // Request method.
