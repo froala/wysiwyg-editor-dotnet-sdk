@@ -109,7 +109,7 @@
             events : {
 
         // Catch image removal from the editor.
-        'image.removed': function (e, editor, $img) {
+        'image.removed': function ($img) {
             $.ajax({
                 // Request method.
                 method: "POST",
@@ -130,7 +130,7 @@
             })
         },
         // Catch image removal from the editor.
-            'video.removed': function (e, editor, $vid) {
+            'video.removed': function ($vid) {
                 $.ajax({
                     // Request method.
                     method: "POST",
@@ -152,7 +152,7 @@
             },
             
         // Catch image removal from the editor.
-        'file.unlink': function (e, editor, link) {
+        'file.unlink': function (link) {
             $.ajax({
                 // Request method.
                 method: "POST",
@@ -185,7 +185,7 @@
             events : {
 
         // Catch image removal from the editor.
-        'image.removed': function (e, editor, $img) {
+        'image.removed': function ($img) {
             $.ajax({
                 // Request method.
                 method: "POST",
@@ -207,7 +207,7 @@
         },
 
         // Catch image removal from the editor.
-        'file.unlink': function (e, editor, link) {
+        'file.unlink': function (link) {
             $.ajax({
                 // Request method.
                 method: "POST",
@@ -243,7 +243,7 @@
             events : {
 
         // Catch image removal from the editor.
-        'image.removed': function (e, editor, $img) {
+        'image.removed': function ($img) {
             $.ajax({
                 // Request method.
                 method: "POST",
@@ -264,7 +264,7 @@
             })
         },
         // Catch image removal from the editor.
-        'file.unlink': function (e, editor, link) {
+        'file.unlink': function (link) {
             $.ajax({
                 // Request method.
                 method: "POST",
