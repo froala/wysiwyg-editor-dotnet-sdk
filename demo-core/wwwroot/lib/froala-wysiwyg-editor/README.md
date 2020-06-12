@@ -1,6 +1,6 @@
-# [Froala Editor V3](https://www.froala.com/wysiwyg-editor)
+# [Froala Editor](https://www.froala.com/wysiwyg-editor)
 
-[![Build Status](https://api.travis-ci.com/froala-labs/froala-editor-js-2.svg?token=RmiyW7AecDyQ8ja7VMDj&branch=master)](https://travis-ci.com/froala-labs/froala-editor-js-2)
+[![Build Status](https://travis-ci.com/froala-labs/froala-editor-js-2.svg?token=6qHm2TpvBKAAVFCrJa9X&branch=master)](https://travis-ci.com/froala-labs/froala-editor-js-2)
 [![npm](https://img.shields.io/npm/dm/froala-editor.svg)](https://www.npmjs.com/package/froala-editor)
 [![npm](https://img.shields.io/npm/v/froala-editor.svg)](https://www.npmjs.com/package/froala-editor)
 
@@ -26,136 +26,47 @@ Froala WYSIWYG HTML Editor is one of the most powerful JavaScript rich text edit
 - **Inline demo**: https://www.froala.com/wysiwyg-editor/inline
 - **Full list**: https://www.froala.com/wysiwyg-editor/examples
 
+​
 
+## Get Started
 
-## Download and Install Froala Editor
-
-### Install from npm
-
-```
-npm install froala-editor
-```
-
-### Install from bower
-
-```
-bower install froala-wysiwyg-editor
-```
-
-### Load from CDN
-Using Froala Editor from CDN is the easiest way to install it and we recommend using the jsDeliver CDN as it mirrors the NPM package. 
+Froala WYSIWYG HTML Editor requires [jQuery](http://jquery.com/) 1.11.0 or higher and the iconic font named [Font Awesome](http://fortawesome.github.io/Font-Awesome/) 4.4.0. You may also use older versions of Font Awesome, but some of the editor's icons will not appear.
 
 ```html
+<!-- Include CSS for icons. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
 <!-- Include Editor style. -->
-<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
 <!-- Create a tag that we will use as the editable area. -->
 <!-- You can use a div tag as well. -->
 <textarea></textarea>
 
+<!-- Include jQuery lib. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 <!-- Include Editor JS files. -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.0/js/froala_editor.pkgd.min.js"></script>
 
 <!-- Initialize the editor. -->
 <script>
-  new FroalaEditor('textarea');
+  $(function() {
+    $('textarea').froalaEditor()
+  });
 </script>
-```
-
-
-
-### Load from CDN as an AMD module
-Froala Editor is compatible with AMD module loaders such as RequireJS. The following example shows how to load it along with the Algin plugin from CDN using RequireJS.
-```html
-<html>
-<head>
-  <!-- Load CSS files. -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.css">
-
-  <script src="require.js"></script>
-  <script>
-    require.config({
-      packages: [{
-        name: 'froala-editor',
-        main: 'js/froala_editor.min'
-      }],
-      paths: {
-        // Change this to your server if you do not wish to use our CDN.
-        'froala-editor': 'https://cdn.jsdelivr.net/npm/froala-editor@latest'
-      }
-    });
-  </script>
-
-  <style>
-    body {
-      text-align: center;
-    }
-    div#editor {
-      width: 81%;
-      margin: auto;
-      text-align: left;
-    }
-    .ss {
-      background-color: red;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="editor">
-    <div id='edit' style='margin-top:30px;'>
-    </div>
-  </div>
-
-  <script>
-    require([
-      'froala-editor',
-      'froala-editor/js/plugins/align.min'
-    ], function(FroalaEditor) {
-      new FroalaEditor('#edit')
-    });
-  </script>
-</body>
-
-</html>
-```
-
-
-
-### Load Froala Editor as a CommonJS Module
-Froala Editor is using an UMD module pattern, as a result it has support for CommonJS. *The following examples presumes you are using npm to install froala-editor, see Download and install FroalaEditor for more details.*
-
-```javascript
-var FroalaEditor = require('froala-editor');
-
-// Load a plugin.
-require('froala-editor/js/plugins/align.min');
-
-// Initialize editor.
-new FroalaEditor('#edit');
-```
-
-
-
-### Load Froala Editor as a transpiled ES6/UMD module
-Since Froala Editor supports ES6 (ESM - ECMAScript modules) and UMD (AMD, CommonJS), it can be also loaded as a module with the use of transpilers. E.g. Babel, Typescript. *The following examples presumes you are using npm to install froala-editor, see Download and install FroalaEditor for more details.*
-
-```javascript
-import FroalaEditor from 'froala-editor'
-
-// Load a plugin.
-import 'froala-editor/js/plugins/align.min.js'
-
-// Initialize editor.
-new FroalaEditor('#edit')
 ```
 
 For more details on customizing the editor, please check the editor [documentation](https://www.froala.com/wysiwyg-editor/docs).
 
+​
 
+## Download
 
-## Use with your existing framework
-
+- npm: `npm install froala-editor`
+- bower: `bower install froala-wysiwyg-editor`
+- CDN: https://cdn.jsdelivr.net/npm/froala-editor/
 - Angular JS: https://github.com/froala/angular-froala
 - Angular 2: https://github.com/froala/angular2-froala-wysiwyg
 - Aurelia: https://github.com/froala/aurelia-froala-editor
@@ -175,7 +86,7 @@ For more details on customizing the editor, please check the editor [documentati
 - Wordpress: https://github.com/froala/wordpress-froala-wysiwyg
 
 
-
+​
 
 ## Browser Support
 
@@ -186,11 +97,11 @@ At present, we officially aim to support the last two versions of the following 
 - Firefox
 - Safari
 - Opera
-- Internet Explorer 11
+- Internet Explorer 10+
 - Safari iOS
 - Chrome, Firefox and Default Browser Android
 
-
+​
 
 ## Resources
 
@@ -203,7 +114,7 @@ At present, we officially aim to support the last two versions of the following 
 - Issues [Repo guidelines](https://github.com/highcharts/highcharts/blob/master/repo-guidelines.md)
 
 
-
+​
 
 ## Reporting Issues
 
@@ -214,13 +125,13 @@ We use GitHub Issues as the official bug tracker for the Froala WYSIWYG HTML Edi
 3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
 
-
+​
 
 ## Technical Support or Questions
 
 If you have questions or need help integrating the editor please [contact us](https://www.froala.com/wysiwyg-editor/contact) instead of opening an issue.
 
-
+​
 
 ## Licensing
 
