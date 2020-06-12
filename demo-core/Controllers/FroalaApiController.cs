@@ -49,6 +49,21 @@ namespace demo.Controllers
             }
         }
 
+        public IActionResult UploadFilesManager () {
+            string uploadPath = "wwwroot/uploads/";
+
+            object response;
+            try
+            {  
+                response = FroalaEditor.FilesManager.Upload(HttpContext, uploadPath);
+                return Json(response);
+            }
+            catch (Exception e)
+            {
+               return Json(e);
+            }
+        }
+
         public IActionResult LoadImages()
         {
             string uploadPath = "wwwroot/uploads/";
@@ -97,6 +112,44 @@ namespace demo.Controllers
                 {
                     return false;
                 }
+
+                return true;
+            };
+
+            FroalaEditor.ImageOptions options = new FroalaEditor.ImageOptions
+            {
+                Fieldname = "myImage",
+                Validation = new FroalaEditor.ImageValidation(validationFunction)
+            };
+
+            try
+            {
+                return Json(FroalaEditor.Image.Upload(HttpContext, fileRoute, options));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+         public IActionResult UploadFilesManagerValidation ()
+        {
+            string fileRoute = "wwwroot/uploads/";
+
+            Func<string, string, bool> validationFunction = (filePath, mimeType) => {
+
+                MagickImageInfo info = new MagickImageInfo(filePath);
+
+                if (info.Width != info.Height)
+                {
+                    return false;
+                }
+
+                long size = new System.IO.FileInfo(filePath).Length;
+                    if (size > 10 * 1024 * 1024)
+                    {
+                        return false;
+                    }
 
                 return true;
             };

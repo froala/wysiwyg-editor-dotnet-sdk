@@ -40,6 +40,7 @@
 <script>
     $(function() {
         new FroalaEditor('#edit', {
+			filesManagerUploadURL: '/FroalaApi/UploadFilesManager',
             imageUploadURL: '/FroalaApi/UploadImage',
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
@@ -122,6 +123,7 @@
         }) 
 
         new FroalaEditor('#edit-resize',{
+			filesManagerUploadURL: '/FroalaApi/UploadImageResize',
             imageUploadURL: '/FroalaApi/UploadImageResize',
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
@@ -177,6 +179,7 @@
             });
 
         new FroalaEditor('#edit-validation', {
+			filesManagerUploadURL: '/FroalaApi/UploadFilesManagerValidation',
             imageUploadURL: '/FroalaApi/UploadImageValidation',
             imageUploadParam: 'myImage',
             fileUploadURL: '/FroalaApi/UploadFileValidation',
@@ -236,6 +239,7 @@
         $.get( "/FroalaApi/S3Signature", {})
         .done(function( data ) {
             new FroalaEditor('#edit-amazon', {
+				filesManagerUploadToS3: data,
                 imageUploadToS3: data,
                 fileUploadToS3: data,
                 videoUploadToS3: data

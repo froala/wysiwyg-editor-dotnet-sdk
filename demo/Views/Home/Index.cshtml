@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/file.css">
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/fullscreen.css">
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/image_manager.css">
+	<link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/files_manager.css">
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/image.css">
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/line_breaker.css">
     <link rel="stylesheet" href="~/Scripts/froala-editor/css/plugins/table.css">
@@ -42,6 +43,7 @@
     <script src="~/Scripts/froala-editor/js/plugins/font_family.min.js"></script>
     <script src="~/Scripts/froala-editor/js/plugins/font_size.min.js"></script>
     <script src="~/Scripts/froala-editor/js/plugins/fullscreen.min.js"></script>
+	<script src="~/Scripts/froala-editor/js/plugins/files_manager.min.js"></script>
     <script src="~/Scripts/froala-editor/js/plugins/image.min.js"></script>
     <script src="~/Scripts/froala-editor/js/plugins/image_manager.min.js"></script>
     <script src="~/Scripts/froala-editor/js/plugins/inline_style.min.js"></script>
@@ -94,6 +96,7 @@
     <script>
     $(function() {
         new FroalaEditor('#edit', {
+            filesManagerUploadURL: '/FroalaApi/UploadFilesManager',
             imageUploadURL: '/FroalaApi/UploadImage',
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
@@ -176,6 +179,7 @@
             })
 
         new FroalaEditor('#edit-resize', {
+            filesManagerUploadURL: '/FroalaApi/UploadImageResize',
             imageUploadURL: '/FroalaApi/UploadImageResize',
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
@@ -231,6 +235,7 @@
             });
 
         new FroalaEditor('#edit-validation', {
+            filesManagerUploadURL: '/FroalaApi/UploadFilesManagerValidation',
             imageUploadURL: '/FroalaApi/UploadImageValidation',
             imageUploadParam: 'myImage',
             fileUploadURL: '/FroalaApi/UploadFileValidation',
@@ -290,6 +295,7 @@
         $.get( "/FroalaApi/S3Signature", {})
         .done(function( data ) {
             new FroalaEditor('#edit-amazon', {
+                filesManagerUploadToS3: data,
                 imageUploadToS3: data,
                 fileUploadToS3: data,
                 videoUploadToS3: data
