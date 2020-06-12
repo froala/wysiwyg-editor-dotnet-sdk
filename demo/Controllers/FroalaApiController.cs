@@ -48,6 +48,21 @@ namespace demo.Controllers
             }
         }
 
+        public ActionResult UploadFilesManager()
+        {
+            string uploadPath = "/Public/";
+
+            try
+            {
+                return Json(FroalaEditor.FilesManager.Upload(System.Web.HttpContext.Current, uploadPath));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+
         public ActionResult LoadImages()
         {
             string uploadPath = "/Public/";
@@ -85,6 +100,38 @@ namespace demo.Controllers
         }
 
         public ActionResult UploadImageValidation()
+        {
+            string fileRoute = "/Public/";
+
+            Func<string, string, bool> validationFunction = (filePath, mimeType) => {
+
+                MagickImageInfo info = new MagickImageInfo(filePath);
+
+                if (info.Width != info.Height)
+                {
+                    return false;
+                }
+
+                return true;
+            };
+
+            FroalaEditor.ImageOptions options = new FroalaEditor.ImageOptions
+            {
+                Fieldname = "myImage",
+                Validation = new FroalaEditor.ImageValidation(validationFunction)
+            };
+
+            try
+            {
+                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, fileRoute, options));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+        public ActionResult UploadFilesManagerValidation()
         {
             string fileRoute = "/Public/";
 
