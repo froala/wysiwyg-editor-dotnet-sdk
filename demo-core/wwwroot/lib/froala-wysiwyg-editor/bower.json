@@ -58,6 +58,7 @@
     "js/plugins/entities.min.js",
     "js/plugins/file.min.js",
     "js/plugins/files_manager.min.js",
+    "js/plugins/cryptojs.min.js",
     "js/plugins/trim_video.min.js",    
     "js/plugins/font_family.min.js",
     "js/plugins/font_size.min.js",
