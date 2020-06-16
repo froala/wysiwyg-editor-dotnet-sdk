@@ -1,6 +1,8 @@
 using System;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using ImageMagick;
+using System.Linq;
 
 namespace demo.Controllers
 {
@@ -80,6 +82,12 @@ namespace demo.Controllers
         public ActionResult UploadImageResize()
         {
             string fileRoute = "/Public/";
+            var fileMimeType = System.Web.HttpContext.Current.Request.Files.Get("file").ContentType;
+            string[] ImageMimeTypes = new string[] { "image/gif", "image/jpeg", "audio/mpeg", "image/png", "image/webp" };
+            if (!ImageMimeTypes.Contains(fileMimeType.ToString()))
+            {
+                return Json(new Exception("Invalid contentType. It must be Image"));
+            }
 
             MagickGeometry resizeGeometry = new MagickGeometry(300, 300);
             resizeGeometry.IgnoreAspectRatio = true;
@@ -134,7 +142,12 @@ namespace demo.Controllers
         public ActionResult UploadFilesManagerValidation()
         {
             string fileRoute = "/Public/";
-
+            var fileMimeType = System.Web.HttpContext.Current.Request.Files.Get("myImage").ContentType;
+            string[] ImageMimeTypes = new string[] { "image/gif", "image/jpeg", "audio/mpeg", "image/png", "image/webp" };
+            if(!ImageMimeTypes.Contains(fileMimeType.ToString()))
+            {
+                return Json(new Exception("Invalid contentType. It must be Image"));
+            }
             Func<string, string, bool> validationFunction = (filePath, mimeType) => {
 
                 MagickImageInfo info = new MagickImageInfo(filePath);
@@ -143,19 +156,23 @@ namespace demo.Controllers
                 {
                     return false;
                 }
-
+                long size = new System.IO.FileInfo(filePath).Length;
+                if (size > 10 * 1024 * 1024)
+                {
+                    return false;
+                }
                 return true;
             };
 
-            FroalaEditor.ImageOptions options = new FroalaEditor.ImageOptions
+            FroalaEditor.FilesManagerOptions options = new FroalaEditor.FilesManagerOptions
             {
                 Fieldname = "myImage",
-                Validation = new FroalaEditor.ImageValidation(validationFunction)
+                Validation = new FroalaEditor.FilesManagerValidation(validationFunction)
             };
 
             try
             {
-                return Json(FroalaEditor.Image.Upload(System.Web.HttpContext.Current, fileRoute, options));
+                return Json(FroalaEditor.FilesManager.Upload(System.Web.HttpContext.Current, fileRoute, options));
             }
             catch (Exception e)
             {

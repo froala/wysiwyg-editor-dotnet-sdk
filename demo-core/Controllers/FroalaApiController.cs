@@ -1,6 +1,8 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using ImageMagick;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace demo.Controllers
 {
@@ -49,6 +51,20 @@ namespace demo.Controllers
             }
         }
 
+        public IActionResult LoadImages()
+        {
+            string uploadPath = "wwwroot/uploads/";
+
+            try
+            {  
+                return Json(FroalaEditor.Image.List(uploadPath));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
         public IActionResult UploadFilesManager () {
             string uploadPath = "wwwroot/uploads/";
 
@@ -64,23 +80,15 @@ namespace demo.Controllers
             }
         }
 
-        public IActionResult LoadImages()
-        {
-            string uploadPath = "wwwroot/uploads/";
-
-            try
-            {  
-                return Json(FroalaEditor.Image.List(uploadPath));
-            }
-            catch (Exception e)
-            {
-                return Json(e);
-            }
-        }
-
-        public IActionResult UploadImageResize()
+        public IActionResult UploadImageResize(Microsoft.AspNetCore.Http.IFormFile file)
         {
             string fileRoute = "wwwroot/uploads/";
+            var fileMimeType = file.ContentType;
+            string[] ImageMimeTypes = new string[] { "image/gif", "image/jpeg", "audio/mpeg", "image/png", "image/webp" };
+            if (!ImageMimeTypes.Contains(fileMimeType.ToString()))
+            {
+                return Json(new Exception("Invalid contentType. It must be Image"));
+            }
 
             MagickGeometry resizeGeometry = new MagickGeometry(300, 300);
             resizeGeometry.IgnoreAspectRatio = true;
@@ -132,44 +140,6 @@ namespace demo.Controllers
             }
         }
 
-         public IActionResult UploadFilesManagerValidation ()
-        {
-            string fileRoute = "wwwroot/uploads/";
-
-            Func<string, string, bool> validationFunction = (filePath, mimeType) => {
-
-                MagickImageInfo info = new MagickImageInfo(filePath);
-
-                if (info.Width != info.Height)
-                {
-                    return false;
-                }
-
-                long size = new System.IO.FileInfo(filePath).Length;
-                    if (size > 10 * 1024 * 1024)
-                    {
-                        return false;
-                    }
-
-                return true;
-            };
-
-            FroalaEditor.ImageOptions options = new FroalaEditor.ImageOptions
-            {
-                Fieldname = "myImage",
-                Validation = new FroalaEditor.ImageValidation(validationFunction)
-            };
-
-            try
-            {
-                return Json(FroalaEditor.Image.Upload(HttpContext, fileRoute, options));
-            }
-            catch (Exception e)
-            {
-                return Json(e);
-            }
-        }
-
         public IActionResult UploadFileValidation ()
         {
             string fileRoute = "wwwroot/";
@@ -188,6 +158,49 @@ namespace demo.Controllers
             FroalaEditor.FileOptions options = new FroalaEditor.FileOptions
             {
                 Fieldname = "myFile",
+                Validation = new FroalaEditor.FileValidation(validationFunction)
+            };
+
+            try
+            {
+                return Json(FroalaEditor.Image.Upload(HttpContext, fileRoute, options));
+            }
+            catch (Exception e)
+            {
+                return Json(e);
+            }
+        }
+
+        public IActionResult UploadFilesManagerValidation (Microsoft.AspNetCore.Http.IFormFile file)
+        {
+            string fileRoute = "wwwroot/";
+            var fileMimeType = file.ContentType;
+            string[] ImageMimeTypes = new string[] { "image/gif", "image/jpeg", "audio/mpeg", "image/png", "image/webp" };
+            if(!ImageMimeTypes.Contains(fileMimeType.ToString()))
+            {
+                return Json(new Exception("Invalid contentType. It must be Image"));
+            }
+
+            Func<string, string, bool> validationFunction = (filePath, mimeType) => {
+
+                long size = new System.IO.FileInfo(filePath).Length;
+                if (size > 10 * 1024 * 1024)
+                {
+                    return false;
+                }
+                MagickImageInfo info = new MagickImageInfo(filePath);
+
+                if (info.Width != info.Height)
+                {
+                    return false;
+                }
+
+                return true;
+            };
+
+            FroalaEditor.FileOptions options = new FroalaEditor.FileOptions
+            {
+                Fieldname = "file",
                 Validation = new FroalaEditor.FileValidation(validationFunction)
             };
 

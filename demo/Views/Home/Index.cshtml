@@ -110,7 +110,27 @@
             videoUploadMethod: 'POST',
 
             events : {
+         // Catch file removal from the files manager popup.
+        'filesManager.removed': function (link) {
+            $.ajax({
+                // Request method.
+                method: "POST",
 
+                // Request URL.
+                url: "/FroalaApi/DeleteFile",
+
+                // Request params.
+                data: {
+                src: link
+                }
+            })
+            .done (function (data) {
+                console.log ('file was deleted from files manager popup');
+            })
+            .fail (function (err) {
+                console.log ('files manager popup file delete problem: ' + JSON.stringify(err));
+            })
+        },
         // Catch image removal from the editor.
         'image.removed': function ($img) {
             $.ajax({
@@ -180,6 +200,7 @@
 
         new FroalaEditor('#edit-resize', {
             filesManagerUploadURL: '/FroalaApi/UploadImageResize',
+            filesManagerUploadParam: 'file',
             imageUploadURL: '/FroalaApi/UploadImageResize',
             fileUploadURL: '/FroalaApi/UploadFile',
             imageManagerLoadURL: '/FroalaApi/LoadImages',
@@ -188,6 +209,27 @@
 
             events : {
 
+        // Catch file removal from the files manager popup.
+        'filesManager.removed': function (link) {
+            $.ajax({
+                // Request method.
+                method: "POST",
+
+                // Request URL.
+                url: "/FroalaApi/DeleteFile",
+
+                // Request params.
+                data: {
+                src: link
+                }
+            })
+            .done (function (data) {
+                console.log ('file was deleted from files manager popup');
+            })
+            .fail (function (err) {
+                console.log ('files manager popup file delete problem: ' + JSON.stringify(err));
+            })
+        },
         // Catch image removal from the editor.
         'image.removed': function ($img) {
             $.ajax({
@@ -236,6 +278,7 @@
 
         new FroalaEditor('#edit-validation', {
             filesManagerUploadURL: '/FroalaApi/UploadFilesManagerValidation',
+            filesManagerUploadParam:'myImage',
             imageUploadURL: '/FroalaApi/UploadImageValidation',
             imageUploadParam: 'myImage',
             fileUploadURL: '/FroalaApi/UploadFileValidation',
@@ -246,7 +289,27 @@
             imageManagerDeleteMethod: "POST",
 
             events : {
+        // Catch file removal from the files manager popup.
+        'filesManager.removed': function (link) {
+            $.ajax({
+                // Request method.
+                method: "POST",
 
+                // Request URL.
+                url: "/FroalaApi/DeleteFile",
+
+                // Request params.
+                data: {
+                src: link
+                }
+            })
+            .done (function (data) {
+                console.log ('file was deleted from files manager popup');
+            })
+            .fail (function (err) {
+                console.log ('files manager popup file delete problem: ' + JSON.stringify(err));
+            })
+        },
         // Catch image removal from the editor.
         'image.removed': function ($img) {
             $.ajax({

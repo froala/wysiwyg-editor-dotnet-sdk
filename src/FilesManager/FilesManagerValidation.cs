@@ -95,7 +95,7 @@ namespace FroalaEditor
                 return Function(filePath, mimeType);
             }
 
-            return AllowedExts.Contains(Utils.GetFileExtension(filePath)) && AllowedMimeTypes.Contains(mimeType.ToLower());;
+            return AllowedExts.Contains(Utils.GetFileExtension(filePath)) && AllowedMimeTypes.Contains(mimeType.ToLower());
         }
     }
 }
