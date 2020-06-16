@@ -266,6 +266,20 @@ namespace demo.Controllers
             return Json(FroalaEditor.S3.GetHash(config), JsonRequestBehavior.AllowGet);
         }
 
+        public object Azure()
+        {
+            FroalaEditor.AzureConfig config = new FroalaEditor.AzureConfig
+            {
+                account = Environment.GetEnvironmentVariable("AZURE_ACCOUNT"),
+                accessKey = Environment.GetEnvironmentVariable("AZURE_ACCESS_KEY"),
+                container = Environment.GetEnvironmentVariable("AZURE_CONTAINER"),
+                SASToken = Environment.GetEnvironmentVariable("AZURE_SAS_TOKEN"),
+                uploadURL = Environment.GetEnvironmentVariable("AZURE_UPLOAD_URL")
+            };
+
+            return Json(config, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Error()
         {
             return View();
