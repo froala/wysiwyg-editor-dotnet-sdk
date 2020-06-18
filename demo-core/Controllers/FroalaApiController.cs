@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ImageMagick;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace demo.Controllers
 {
@@ -272,16 +273,14 @@ namespace demo.Controllers
 
         public IActionResult Azure ()
         {
-            FroalaEditor.AzureConfig config = new FroalaEditor.AzureConfig
+            return Json( new Dictionary<string, object>
             {
-                account = Environment.GetEnvironmentVariable("AZURE_ACCOUNT"),
-                accessKey = Environment.GetEnvironmentVariable("AZURE_ACCESS_KEY"),
-                container = Environment.GetEnvironmentVariable("AZURE_CONTAINER"),
-                SASToken = Environment.GetEnvironmentVariable("AZURE_SAS_TOKEN"),
-                uploadURL = Environment.GetEnvironmentVariable("AZURE_UPLOAD_URL")
-            };
-
-            return Json(config);
+                { "account", Environment.GetEnvironmentVariable("AZURE_ACCOUNT") },
+                { "accessKey", Environment.GetEnvironmentVariable("AZURE_ACCESS_KEY") },
+                { "container", Environment.GetEnvironmentVariable("AZURE_CONTAINER") },
+                { "SASToken", Environment.GetEnvironmentVariable("AZURE_SAS_TOKEN") },
+                { "uploadURL", Environment.GetEnvironmentVariable("AZURE_UPLOAD_URL") },
+            });
         }
 
         public IActionResult Error()
