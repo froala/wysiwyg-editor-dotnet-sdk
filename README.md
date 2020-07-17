@@ -21,6 +21,9 @@ Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor
 
  * Visual Studio -> Right click on your project -> Add -> Reference... -> Select `src` project.
 
+## Note
+ * Third party plugins aren't supported
+
 ## Documentation
 
  * [Official documentation](https://www.froala.com/wysiwyg-editor/docs/sdks/dotnet)
