@@ -11,12 +11,12 @@ namespace FroalaEditor
         /// <summary>
         /// Allowed file validation default extensions.
         /// </summary>
-        public static string[] AllowedFileExtsDefault = new string[] { "txt", "pdf", "doc" };
+        public static string[] AllowedFileExtsDefault = new string[] { "txt", "pdf", "doc" , "png", "jpg" , "mp4"};
 
         /// <summary>
         /// Allowed file validation default mimetypes.
         /// </summary>
-        public static string[] AllowedFileMimetypesDefault = new string[] { "text/plain", "application/msword", "application/x-pdf", "application/pdf" };
+        public static string[] AllowedFileMimetypesDefault = new string[] { "text/plain", "application/msword", "application/x-pdf", "application/pdf", "image/png" , "video/mp4", "image/jpeg" };
 
         /// <summary>
         /// Allowed validation extensions.
