@@ -4,7 +4,7 @@ Easing the [Froala WYSIWYG HTML Editor](https://github.com/froala/wysiwyg-editor
 
 ## Dependencies
 
-.NET Core 1.0 or .Net Framework version 4.5.2+ is required.
+.NET Core 2.2 or .Net Framework version 4.7.1+ is required.
 
 ## Installation
 
