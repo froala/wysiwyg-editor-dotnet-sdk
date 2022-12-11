@@ -8,6 +8,6 @@ RUN ["dotnet", "restore"]
 
 RUN ["dotnet", "build"]
 
-EXPOSE 5002/tcp
+EXPOSE 5000/tcp
 
-CMD ["dotnet", "run", "--server.urls", "http://*:5002"]
+CMD ["dotnet", "run", "--server.urls", "http://*:5000"]
