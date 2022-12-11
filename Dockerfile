@@ -30,4 +30,4 @@ RUN mv package/ wwwroot/lib/froala-wysiwyg-editor
 RUN rm -rf ${PackageName}-${PackageVersion}.tgz
 
 EXPOSE 5002
-CMD ["dotnet", "run", "--server.urls", "http://*:5002"]
+CMD ["dotnet","run"]
