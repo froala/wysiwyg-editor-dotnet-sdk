@@ -19,6 +19,10 @@ before_install:
   - echo $PWD
   - echo $TRAVIS_COMMIT
   - echo $BUILD_REPO_NAME
+  - nvm install 14.19.0
+  - nvm ls
+  - nvm use 14.19.0
+  - echo $(npm -v)  
 jobs:
   include:
     if: commit_message =~ /(deploy-yes)/
