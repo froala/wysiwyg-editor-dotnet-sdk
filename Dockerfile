@@ -1,7 +1,7 @@
 FROM node:14.17.3
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
-LABEL maintainer="froala_git_travis_bot@idera.com"
+LABEL maintainer="rizwan@celestialsys.com"
 
 COPY --from=node / /
 
@@ -22,5 +22,12 @@ RUN npm install -g bower
 RUN bower --allow-root install
 
 RUN wget --no-check-certificate --user ${NexusUser}  --password ${NexusPassword} https://nexus.tools.froala-infra.com/repository/Froala-npm/${PackageName}/-/${PackageName}-${PackageVersion}.tgz
+RUN tar -xvf ${PackageName}-${PackageVersion}.tgz
+
+RUN rm -rf wwwroot/lib/froala-wysiwyg-editor
+RUN mv package/ wwwroot/lib/froala-wysiwyg-editor
+
+RUN rm -rf ${PackageName}-${PackageVersion}.tgz
+
 EXPOSE 5002
 CMD ["dotnet","run"]
