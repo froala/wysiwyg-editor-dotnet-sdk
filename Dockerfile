@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
 LABEL maintainer=""
 
-COPY --from=node / /
+COPY --from=node /usr/bin/test /usr/bin/test
 
 ARG PackageName
 ARG PackageVersion
@@ -16,7 +16,10 @@ RUN apt update -y \
 
 COPY . /app
 WORKDIR /app/demo-core
-
+RUN apt install curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 RUN npm install -g bower
 RUN bower --allow-root install
 
