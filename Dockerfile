@@ -1,7 +1,7 @@
 FROM node:14.17.3
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
-LABEL maintainer="rizwan@celestialsys.com"
+LABEL maintainer=""
 
 COPY --from=node / /
 
@@ -9,7 +9,6 @@ ARG PackageName
 ARG PackageVersion
 ARG NexusUser
 ARG NexusPassword
-
 ENV ASPNETCORE_ENVIRONMENT=Development
 
 RUN apt update -y \
