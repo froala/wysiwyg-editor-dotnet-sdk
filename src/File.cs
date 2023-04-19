@@ -122,7 +122,6 @@ namespace FroalaEditor
                 throw new Exception("File does not meet the validation.");
             }
 
-            link = link + "?test=1";
             // Make sure it is compatible with ASP.NET Core.
             return new { link = link.Replace("wwwroot/", "") };
         }
