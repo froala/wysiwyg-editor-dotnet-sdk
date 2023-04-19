@@ -23,7 +23,7 @@ namespace demo
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:5002/")
+                .UseUrls("http://0.0.0.0:5002/")
                 .Build();
 
             host.Run();
