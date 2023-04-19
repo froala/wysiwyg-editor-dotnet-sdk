@@ -25,9 +25,7 @@ IMAGE_NAME=`echo "${BUILD_REPO_NAME}_${TRAVIS_BRANCH}" | tr '[:upper:]' '[:lower
 PACKAGE_NAME=`jq '.name' version.json | tr -d '"'` 
 PACKAGE_VERSION=`jq '.version' version.json | tr -d '"'`
 echo "Package name : ${PACKAGE_NAME}"
-jq --arg froalaeditor "file:${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz" '.dependencies["froala-editor"] |= $froalaeditor' bower.json  > new.file && cat new.file > bower.json && rm -f new.file
-echo "verify package"
-cat bower.json
+
 docker build -t  ${IMAGE_NAME}:${SHORT_COMMIT} --build-arg PackageName=${PACKAGE_NAME} --build-arg PackageVersion=${PACKAGE_VERSION} --build-arg NexusUser=${NEXUS_USER} --build-arg NexusPassword=${NEXUS_USER_PWD} .
 sleep 3
 docker image ls 
