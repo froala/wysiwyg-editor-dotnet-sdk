@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>FroalaEditorSDK</id>
-    <version>4.5.0</version>
+    <version>4.5.1</version>
     <title>Froala WYSIWYG Editor SDK</title>
     <authors>Froala Labs</authors>
     <owners>Froala</owners>
@@ -12,6 +12,7 @@
     <description>Ease server integration of the Froala WYSIWYG HTML Editor.</description>
     <copyright>Copyright 2016</copyright>
     <tags>froala wysiwyg html editor richt text editor image upload</tags>
+    <readme>docs\README.md</readme>
     <dependencies>
       <group>
         <dependency id="RouteMagic" version="1.1.0" />
@@ -35,5 +36,6 @@
   <files>
     <file src="bin\Debug\net471\FroalaEditorSDK.dll" target="lib\net471\FroalaEditorSDK.dll" />
     <file src="bin\Debug\netstandard2.0\FroalaEditorSDK.dll" target="lib\netstandard2.0\FroalaEditorSDK.dll" />
+    <file src="..\README.md" target="docs\" />
   </files>
 </package>
